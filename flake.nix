@@ -7,7 +7,7 @@
   };
 
   outputs =
-    { self, ... }@inputs:
+    inputs:
     inputs.flake-utils.lib.eachDefaultSystem (
       system:
       let
@@ -34,7 +34,7 @@
             programs = {
               golines.enable = true;
               nixfmt.enable = true;
-              # prettier.enable = true;
+              prettier.enable = true;
               # templ.enable = true;
               # shfmt.enable = true;
             };
@@ -66,7 +66,7 @@
         };
 
         checks = {
-          formatting = treefmtEval.config.build.check self;
+          formatting = treefmtEval.config.build.check inputs.self;
         };
         formatter = treefmtEval.config.build.wrapper;
 
